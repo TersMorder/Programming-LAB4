@@ -1,8 +1,7 @@
 package Objects;
 
-public class WorldOrAllActions {
-    public  WorldOrAllActions(){}
-    public void everyoneIsSleeping(){
-        System.out.println("Все уснули");
+ public class  ProgrammActions {
+    public static void switchToNext(){
+        System.out.println();
     }
 }

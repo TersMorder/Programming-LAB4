@@ -23,6 +23,7 @@ public abstract class Object {
     public Object(String name){
         this.name=name;
     }
+    public Object(){}
     public String getName(){
         return objName;
     }

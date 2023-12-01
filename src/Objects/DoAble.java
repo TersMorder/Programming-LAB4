@@ -25,6 +25,10 @@ public class DoAble extends Object implements Properties {
         this.gender = gender;
         oldName = name;
     }
+    public DoAble(){
+        gender = Genders.NONE;
+        oldName = "null";
+    }
 
 
 
@@ -52,9 +56,11 @@ public class DoAble extends Object implements Properties {
                         System.out.println(this.name + " не пошла спать");
                         break;
                 }
+            case everyoneIsSleeping:
+                System.out.println("Все уснули");
                 break;
             case grab:
-                switch(gender) {
+                switch (gender) {
                     case M:
                         System.out.print(this.name + " взял");
                         break;
@@ -77,17 +83,14 @@ public class DoAble extends Object implements Properties {
                 break;
             case drawContiniue:
                 flagpoint = true;
-                switch (gender){
-                    case M:
-                        System.out.print(this.name + " нарисовал" );
-                        break;
-                    case W:
-                        System.out.print(this.name + " нарисовала" );
-                        break;
-                }
-                break;
-            case switchToNext:
-                System.out.println();
+                        switch (gender) {
+                            case M:
+                                System.out.print(this.name + " нарисовал");
+                                break;
+                            case W:
+                                System.out.print(this.name + " нарисовала");
+                                break;
+                        }
                 break;
             case addToPicture:
                 char[] oldCharArray = super.objName.toCharArray();
@@ -139,6 +142,7 @@ public class DoAble extends Object implements Properties {
 
 
     public void doSomething(Action act, Object obj, Flag flag) {
+
         if(flag == Flag.AFTER) {
             doSomething(act);
             objName = obj.getName();

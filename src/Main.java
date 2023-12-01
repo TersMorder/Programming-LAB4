@@ -4,6 +4,7 @@ import Enums.Genders;
 import Objects.DoAble;
 import Objects.Props;
 import Objects.Things;
+import Objects.ProgrammActions;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,37 +15,37 @@ public class Main {
         Props HunterPulka= new Props("Пулька", Genders.M);
         DoAble DoctorPilulka = new DoAble("Пилюлька", Genders.M);
         DoAble Knower = new DoAble("Знайка", Genders.M);
-        DoAble SleepCheck = new DoAble("чекаю", Genders.NONE);
+        DoAble AllVillagers = new DoAble();
         Things Can = new Things("краски");
         FastGuy.getName();
         Gunka.doSomething(Action.goCryAboutIt);
         DontKnower.doSomething(Action.dontGoToSleep);
-        SleepCheck.doSomething(Action.everyoneIsSleeping);
+        AllVillagers.doSomething(Action.everyoneIsSleeping);
         DontKnower.doSomething(Action.grab, Can);
         DontKnower.doSomething(Action.drawStart);
         Donut.giveProperty("толстый");
         Donut.changeProperty();
         DontKnower.doSomething(Action.drawContiniue, Donut, Flag.AFTER);
-        DontKnower.doSomething(Action.switchToNext);
+        ProgrammActions.switchToNext();
         DontKnower.doSomething(Action.dontFit, Donut, Flag.BEFORE);
-        DontKnower.doSomething(Action.switchToNext);
+        ProgrammActions.switchToNext();
         FastGuy.giveProperty("тонконогий");
         FastGuy.changeProperty();
         DontKnower.doSomething(Action.drawContiniue, FastGuy, Flag.AFTER);
-        DontKnower.doSomething(Action.switchToNext);
+        ProgrammActions.switchToNext();
         DontKnower.doSomething(Action.addToPicture, "собачий хвост");
-        DontKnower.doSomething(Action.switchToNext);
+        ProgrammActions.switchToNext();
         HunterPulka.giveStartProperty("наездник");
         HunterPulka.changeProperty();
         HunterPulka.giveProperty("на Бульке");
         DontKnower.doSomething(Action.drawContiniue, HunterPulka, Flag.AFTER);
-        DontKnower.doSomething(Action.switchToNext);
+        ProgrammActions.switchToNext();
         DoctorPilulka.giveProperty("Доктор");
         DoctorPilulka.changeProperty();
         DontKnower.doSomething(Action.drawContiniue, DoctorPilulka, Flag.AFTER, "с градусником вместо носа");
-        DontKnower.doSomething(Action.switchToNext);
+        ProgrammActions.switchToNext();
         DontKnower.doSomething(Action.drawContiniue, Knower, Flag.AFTER, "с ослиными ушами");
-        DontKnower.doSomething(Action.switchToNext);
+        ProgrammActions.switchToNext();
         DontKnower.doSomething(Action.drawEnd);
 
 
