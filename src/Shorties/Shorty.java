@@ -54,7 +54,11 @@ public abstract class Shorty implements PropertyChanging, NameChanging {
             this.isSleeping = isSleeping;
         }
         if (sleepingShorties == 7 && !isSleeping) {
-            changeNameEnding();
+            char[] nameCharArray = name.toCharArray();
+            if(nameCharArray[nameCharArray.length-1] == 'а'){
+                nameCharArray[nameCharArray.length-1] = 'и';
+                name = new String(nameCharArray);
+            }
             System.out.println("Все кроме " + name + " уснули");
             clearNameChanges();
         }
