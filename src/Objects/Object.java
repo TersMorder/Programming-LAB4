@@ -1,30 +1,22 @@
 package Objects;
 
-import Enums.Flag;
-import Enums.Genders;
-
+/** Абстрактный класс объектов реализующий их базовый функционал */
 public abstract class Object {
+    /** Имя объекта */
     protected String name;
-    protected Genders gender;
-    protected Flag flag;
-    protected String objName;
+    /** Используется для записи изначального имени, чтобы при надобности вернуться к нему*/
+    final protected String oldName;
 
-    public Object (String name, Genders gender, Flag flag){
-        this.name=name;
-        this.gender = gender;
-        this.flag = flag;
-
-    }
-    public Object (String name, Genders gender){
-        this.name=name;
-        this.gender = gender;
-        this.objName = this.name;
-    }
+    /** Базовый конструктор
+     * @param name имя объекта*/
     public Object(String name){
-        this.name=name;
+        this.name = name;
+        oldName = name;
     }
-    public Object(){}
-    public String getName(){
-        return objName;
+    /** Переопределение toString() для корректного вывода имени объекта */
+    @Override
+    public String toString() {
+        return name;
     }
 }
+
