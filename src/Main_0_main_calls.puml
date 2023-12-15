@@ -1,0 +1,284 @@
+@startuml
+
+/' diagram meta data start
+config=CallConfiguration;
+{
+  "rootMethod": "Main#main(String[])",
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": true,
+    "cutInterfaceStructures": true,
+    "cutDataStructures": true,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 3,
+    "backwardDepth": 3,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showMethodParametersTypes": false,
+    "showMethodParametersNames": false,
+    "showMethodReturnType": false,
+    "showPackageLevels": 2,
+    "showCallOrder": false,
+    "edgeMode": "MethodsOnly", // TypesOnly, MethodsOnly, TypesAndMethods, MethodsAndDirectTypeUsage
+    "showDetailedClassStructure": false
+  },
+  "rootClass": "Main",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="LR"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_2390489 { 
+   	label=Main
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_1706522830 { 
+   	label=Main
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   Main2390489XXXmain1859653459[
+	label="+ main()"
+	style=filled
+	fillcolor=white
+	tooltip="Main
+
+null"
+	penwidth=4
+	fontcolor=darkgreen
+];
+} 
+} 
+
+subgraph cluster_277850885 { 
+   	label=Shorties
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_1460582479 { 
+   	label=Donut
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   Donut277850885XXXdontFit0[
+	label="+ dontFit()"
+	style=filled
+	fillcolor=white
+	tooltip="Donut
+
+ Проверка помещается ли пончик на картине и вывод этого"
+	fontcolor=darkgreen
+];
+} 
+
+subgraph cluster_1463531459 { 
+   	label=Gunka
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   Gunka277850885XXXtakeOffence64711720[
+	label="+ takeOffence()"
+	style=filled
+	fillcolor=white
+	tooltip="Gunka
+
+ Даёт свойство обижен коротышке и проверяет, ушёл ли тот домой после этого, после чего выводит соответсвующее сообщение&#10;  @param gohome используется для проверки "
+	fontcolor=darkgreen
+];
+} 
+
+subgraph cluster_1543583760 { 
+   	label=Shorty
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   Shorty277850885XXXclearProperty0[
+	label="+ clearProperty()"
+	style=filled
+	fillcolor=white
+	tooltip="Shorty
+
+ Убирает все свойства данные объекту или коротышке "
+	fontcolor=darkgreen
+];
+
+Shorty277850885XXXgiveProperty835297748[
+	label="+ giveProperty()"
+	style=filled
+	fillcolor=white
+	tooltip="Shorty
+
+ Даёт свойство коротышке путём изменения его имени на имя + свойство, или свойство + имя&#10; @param property свойство которое нужно дать коротышке&#10; @param flag флаг отвечающий за позицию свойства относительно имени до/после&#10;"
+	fontcolor=darkgreen
+];
+
+Shorty277850885XXXgoToSleep64711720[
+	label="+ goToSleep()"
+	style=filled
+	fillcolor=white
+	tooltip="Shorty
+
+ Меняет состояние коротышки на спящее,&#10;  в случае если все коротышки спят, а коротышка, относящийся к методу,&#10;  не ложится спать, выводит сообщение об этом&#10;  @param isSleeping влияет на то, будет ли ложиться спать коротышка, или нет"
+	fontcolor=darkgreen
+];
+
+Shorty277850885XXXgrab454837339[
+	label="+ grab()"
+	style=filled
+	fillcolor=white
+	tooltip="Shorty
+
+ Выводит имя объекта и предмет который он взял, добавляет этот предмет в инвентарь коротышки&#10;  @param object Предмет, который берёт коротышка"
+	fontcolor=darkgreen
+];
+} 
+
+subgraph cluster_275214756 { 
+   	label=DontKnower
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   DontKnower277850885XXXaddToPicture1789495998[
+	label="+ addToPicture()"
+	style=filled
+	fillcolor=white
+	tooltip="DontKnower
+
+ Добавляет к фрагменту рисунка какую-то деталь&#10;  @param detail деталь которую нужно добавить к рисунку&#10;  @param shorty коротышка к которому нужно пририсовать деталь"
+	fontcolor=darkgreen
+];
+
+DontKnower277850885XXXcontiniueDrawing1608309251[
+	label="+ continiueDrawing()"
+	style=filled
+	fillcolor=white
+	tooltip="DontKnower
+
+ Рисование следующего фрагмента рисунка&#10;  @param shorty коротышка которого нужно нарисовать&#10;  @param property то каким он должен быть нарисован&#10;  @param flag с какой стороны относительно имени должно находиться свойство"
+	fontcolor=darkgreen
+];
+
+DontKnower277850885XXXcontiniueDrawing1819281507[
+	label="+ continiueDrawing()"
+	style=filled
+	fillcolor=white
+	tooltip="DontKnower
+
+ Рисование следующего фрагмента рисунка без свойств у нарисованного коротышки&#10;  @param shorty коротышка которого нужно нарисовать"
+	fontcolor=darkgreen
+];
+
+DontKnower277850885XXXcontiniueDrawing1845454491[
+	label="+ continiueDrawing()"
+	style=filled
+	fillcolor=white
+	tooltip="DontKnower
+
+ Рисование следующего фрагмента рисунка&#10;  @param shorty1 коротышка которого нужно нарисовать&#10;  @param shorty2 коротышка с которым происходит взаимодействие в рисунке&#10;  @param property1 свойство с которым будет shorty1&#10;  @param property2 свойство с которым будет shorty2&#10;  @param flag с какой стороны относительно имени должно находиться свойство"
+	fontcolor=darkgreen
+];
+
+DontKnower277850885XXXendDrawing0[
+	label="+ endDrawing()"
+	style=filled
+	fillcolor=white
+	tooltip="DontKnower
+
+ Завершает рисование, в случае если были нарисованы все коротышки то выводит соответсвующее сообщение "
+	fontcolor=darkgreen
+];
+
+DontKnower277850885XXXstartDrawing0[
+	label="+ startDrawing()"
+	style=filled
+	fillcolor=white
+	tooltip="DontKnower
+
+ Проверяет есть ли в инвентаре коротышки краски и даёт добро на их использование для начала рисования первой части рисунка"
+	fontcolor=darkgreen
+];
+} 
+} 
+
+'edges    
+DontKnower277850885XXXcontiniueDrawing1608309251 -> Shorty277850885XXXgiveProperty835297748;
+DontKnower277850885XXXcontiniueDrawing1845454491 -> Shorty277850885XXXgiveProperty835297748;
+Gunka277850885XXXtakeOffence64711720 -> Shorty277850885XXXclearProperty0;
+Gunka277850885XXXtakeOffence64711720 -> Shorty277850885XXXgiveProperty835297748;
+Main2390489XXXmain1859653459 -> DontKnower277850885XXXaddToPicture1789495998;
+Main2390489XXXmain1859653459 -> DontKnower277850885XXXcontiniueDrawing1608309251;
+Main2390489XXXmain1859653459 -> DontKnower277850885XXXcontiniueDrawing1819281507;
+Main2390489XXXmain1859653459 -> DontKnower277850885XXXcontiniueDrawing1845454491;
+Main2390489XXXmain1859653459 -> DontKnower277850885XXXendDrawing0;
+Main2390489XXXmain1859653459 -> DontKnower277850885XXXstartDrawing0;
+Main2390489XXXmain1859653459 -> Donut277850885XXXdontFit0;
+Main2390489XXXmain1859653459 -> Gunka277850885XXXtakeOffence64711720;
+Main2390489XXXmain1859653459 -> Shorty277850885XXXgoToSleep64711720;
+Main2390489XXXmain1859653459 -> Shorty277850885XXXgrab454837339;
+    
+}
+@enduml
