@@ -9,12 +9,12 @@ public class Main {
         Paints paints = new Paints("Краски");
         Gunka gunka = new Gunka("Гунька", Genders.M, false);
         DontKnower dontKnower = new DontKnower("Незнайка", Genders.M, false);
-        Bulka bulka = new Bulka("Булька", Genders.M, true);
-        Pulka pulka =new Pulka("Пулька", Genders.M, true);
+        Shorty bulka = new Shorty("Булька", Genders.M, true) {};
+        Shorty pulka =new Shorty("Пулька", Genders.M, true){};
         Donut donut = new Donut("Пончик", Genders.M, true);
-        Knower knower = new Knower("Знайка", Genders.M, true);
-        HastyGuy hastyGuy = new HastyGuy("Торопыжка", Genders.M, true);
-        Pilulka pilulka = new Pilulka("Пилюлькин", Genders.M, true);
+        Shorty knower = new Shorty("Знайка", Genders.M, true) {};
+        Shorty hastyGuy = new Shorty("Торопыжка", Genders.M, true) {};
+        Shorty pilulka = new Shorty("Пилюлькин", Genders.M, true) {};
         gunka.takeOffence(true);
         gunka.goToSleep(true);
         dontKnower.goToSleep(false);
@@ -26,7 +26,7 @@ public class Main {
         dontKnower.addToPicture(hastyGuy, "собачий хвост");
         dontKnower.continiueDrawing(bulka, pulka, Properies.HORSEBACK, Properies.UNDER, Flags.AFTER);
         dontKnower.continiueDrawing(pilulka);
-        dontKnower.addToPicture(pilulka, "градусник вместо носа");
+        dontKnower.addToPicture(pilulka, "с градусником вместо носа");
         dontKnower.continiueDrawing(knower);
         dontKnower.addToPicture(knower, "ослиные уши");
         dontKnower.endDrawing();

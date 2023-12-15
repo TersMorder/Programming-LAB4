@@ -10,7 +10,6 @@ public interface PropertyChanging {
    void giveProperty(Properies property, Flags flag);
    /** Убирает все свойства данные объекту или коротышке */
    void clearProperty();
-   /** Меняет окончание у свойства на подходящее контексту*/
-   void changePropertyEnding();
+
 
 }

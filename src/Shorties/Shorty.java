@@ -3,13 +3,13 @@ package Shorties;
 import Enums.Flags;
 import Enums.Genders;
 import Enums.Properies;
-import Interfaces.NameChanging;
 import Interfaces.PropertyChanging;
 import java.util.Objects;
+import Objects.InanimateObject;
 
 
 /** Абстрактный класс предоставляющий базовый функционал для классов-наследников — коротышек*/
-public abstract class Shorty implements PropertyChanging, NameChanging {
+public abstract class Shorty implements PropertyChanging{
     /** Имя коротышки */
     protected String name;
     /** Пол коротышки */
@@ -17,8 +17,8 @@ public abstract class Shorty implements PropertyChanging, NameChanging {
     /** Используется для сохранения начального имени коротышки */
     final String oldName;
     /** Инвентарь коротышки */
-    protected String[] inventory = new String[2];
-    /** Поле, которое приравнивается к String значению может обладать коротышка */
+    protected InanimateObject[] inventory = new InanimateObject[2];
+    /** Свойства, которыми может обладать коротышка */
     private String property;
     /** Массив enum Properties хранящий свойства коротышек
      * @see Properies */
@@ -60,44 +60,22 @@ public abstract class Shorty implements PropertyChanging, NameChanging {
                 name = new String(nameCharArray);
             }
             System.out.println("Все кроме " + name + " уснули");
-            clearNameChanges();
         }
     }
 
 
     /** Выводит имя объекта и предмет который он взял, добавляет этот предмет в инвентарь коротышки
      * @param object Предмет, который берёт коротышка*/
-    public void grab(Object object) {
+    public void grab(InanimateObject object) {
         System.out.println(name + " взял" + " " + object.toString().toLowerCase());
         for (int i=0; i< inventory.length; i++){
             if(inventory[i] == null){
-                inventory[i] = object.toString();
-                char[] objectCharArray = object.toString().toCharArray();
-                char[] nameCharArray = name.toCharArray();
-                nameCharArray[nameCharArray.length-1] = 'и';
-                name = new String(nameCharArray);
-                if (objectCharArray[objectCharArray.length-1] == 'и') {
-                    System.out.println(object + " добавлены в инвентарь " + name);
-                    clearNameChanges();
-                    break;
-                }
-                else if(objectCharArray[objectCharArray.length-1] == 'а'){
-                    changeNameEnding();
-                    System.out.println(object + " добавлена в инвентарь " + name);
-                    clearNameChanges();
-                    break;
-                }
-                else{
-                    changeNameEnding();
-                    System.out.println(object + " добавлен в инвентарь " + name);
-                    clearNameChanges();
-                    break;
-                }
+                System.out.println(object + " добавлен в инвентарь " + name);
+                inventory[i] = object;
+                break;
             }
             else {
-                changeNameEnding();
                 System.out.println("В инвентаре " + name + " нет места");
-                clearNameChanges();
             }
         }
     }
@@ -116,22 +94,7 @@ public abstract class Shorty implements PropertyChanging, NameChanging {
             }
         }
         this.property = property.toString();
-        char[] charPropArray = this.property.toCharArray();
 
-        if (charPropArray[charPropArray.length - 1] == 'й') {
-            char[] charNewPropArray = new char[charPropArray.length + 1];
-            System.arraycopy(charPropArray, 0, charNewPropArray, 0, charPropArray.length);
-            charNewPropArray[charNewPropArray.length - 1] = 'о';
-            charNewPropArray[charNewPropArray.length - 2] = 'г';
-            charNewPropArray[charNewPropArray.length - 3] = 'о';
-            this.property = new String(charNewPropArray);
-        }
-        else if (charPropArray[charPropArray.length - 1] == 'к' || charPropArray[charPropArray.length - 1] == 'р') {
-            char[] charNewPropArray = new char[charPropArray.length + 1];
-            System.arraycopy(charPropArray, 0, charNewPropArray, 0, charPropArray.length);
-            charNewPropArray[charPropArray.length] = 'а';
-            this.property = new String(charNewPropArray);
-        }
         if (flag == Flags.BEFORE) {
             this.name = this.property + " " + this.name;
         }
@@ -147,52 +110,6 @@ public abstract class Shorty implements PropertyChanging, NameChanging {
         this.name = oldName;
     }
 
-
-    @Override
-    public void changePropertyEnding(){
-            char[] charPropArray = this.property.toCharArray();
-            if (charPropArray[charPropArray.length - 1] == 'й') {
-                char[] charNewPropArray = new char[charPropArray.length + 1];
-                System.arraycopy(charPropArray, 0, charNewPropArray, 0, charPropArray.length);
-                charNewPropArray[charNewPropArray.length - 1] = 'о';
-                charNewPropArray[charNewPropArray.length - 2] = 'г';
-                charNewPropArray[charNewPropArray.length - 3] = 'о';
-                property = new String(charNewPropArray);
-            }
-            else if (charPropArray[charPropArray.length - 1] == 'к' || charPropArray[charPropArray.length - 1] == 'р') {
-                char[] charNewPropArray = new char[charPropArray.length + 1];
-                System.arraycopy(charPropArray, 0, charNewPropArray, 0, charPropArray.length);
-                charNewPropArray[charPropArray.length] = 'а';
-                property = new String(charNewPropArray);
-            }
-            this.name = property + " " + this.name;
-    }
-
-
-    @Override
-    public void changeNameEnding() {
-        char[] charNameArray = name.toCharArray();
-            if (charNameArray[charNameArray.length - 1] == 'а') {
-                charNameArray[charNameArray.length - 1] = 'у';
-                name = new String(charNameArray);
-            }
-            else if (charNameArray[charNameArray.length - 1] == 'к' || charNameArray[charNameArray.length - 1] == 'н') {
-                char[] newCharNameArray = new char[charNameArray.length+1];
-                System.arraycopy(charNameArray, 0, newCharNameArray, 0, charNameArray.length);
-                newCharNameArray[charNameArray.length] = 'а';
-                name = new String(newCharNameArray);
-            }
-
-    }
-
-
-
-
-
-    @Override
-    public void clearNameChanges(){
-        this.name = oldName;
-    }
     /** Переопределение toString() для корректного вывода имени коротышки */
     @Override
     public String toString() {
