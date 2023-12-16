@@ -1,21 +1,22 @@
 package Shorties;
 
-import Enums.Flags;
-import Enums.Genders;
-import Enums.Properies;
+import Enums.*;
 import Interfaces.PropertyChanging;
 import java.util.Objects;
-import Objects.InanimateObject;
+import InanimateObjects.InanimateObject;
+import Interfaces.ShortyActions;
 
 
 /** Абстрактный класс предоставляющий базовый функционал для классов-наследников — коротышек*/
-public abstract class Shorty implements PropertyChanging{
+public abstract class Shorty implements PropertyChanging, ShortyActions {
     /** Имя коротышки */
     protected String name;
     /** Пол коротышки */
     protected Genders gender;
     /** Используется для сохранения начального имени коротышки */
     final String oldName;
+    /**Активность которой занят коротышка*/
+    private ActionStatuses shortyAction;
     /** Инвентарь коротышки */
     protected InanimateObject[] inventory = new InanimateObject[2];
     /** Свойства, которыми может обладать коротышка */
@@ -25,9 +26,10 @@ public abstract class Shorty implements PropertyChanging{
     protected final Properies[] props = Properies.values();
     /** Значение поля увеличивается в случае если коротышка уже спит, или лег спать */
     protected static int sleepingShorties = 0;
+    /** Используется для проверки занятости коротышки */
+    private boolean actionCheck;
     /** Отвечает за смену статуса сна у коротышки */
-    boolean isSleeping;
-
+    protected boolean isSleeping;
 
     /** Конструктор для создания объекта типа Shorty внутри происходит присваивание значений параметров
      * переменным созданным ранее в классе
@@ -35,7 +37,8 @@ public abstract class Shorty implements PropertyChanging{
      * @param gender Пол коротышки
      * @param isSleeping указывает спит ли коротышка в момент создания объекта
      */
-    public Shorty (String name, Genders gender, boolean isSleeping){
+    public Shorty (String name, Genders gender, boolean isSleeping) {
+        shortyAction = ActionStatuses.NONE;
         this.name=name;
         this.gender = gender;
         this.oldName = name;
@@ -44,21 +47,56 @@ public abstract class Shorty implements PropertyChanging{
             ++sleepingShorties;
         }
     }
+
+    /** Используется для провеки наличия предметов у коротышки
+     * @return Инвентарь которышки*/
+    public InanimateObject[] getInventory() {
+        return inventory;
+    }
+    /**Используется для вывода сообщений с правильными окончаниями
+     * @return Пол коротышки*/
+    public Genders getGender(){
+        return gender;
+    }
+    /**Используется в методах, где указывается с каким коротышкой идёт взаимодействие
+     * @return Имя коротышки*/
+    public String getName(){
+        return name;
+    }
+    /** Используется для проверок последовательности действий и запрета на выполнение нескольких действий одновременно
+     * @return Статус занятости коротышки*/
+    public boolean getActionCheck(){
+        return actionCheck;
+    }
+    /** Геттер статуса активности коротышки, используется для проверки чем занят коротыщка
+     * @return Чем занят коротышка*/
+    public ActionStatuses getShortyActivity(){
+        return shortyAction;
+    }
+    /**Сеттер активности коротышки
+     * @param shortyAction Активность, которой будет занят коротышка*/
+    public void setShortyAction(ActionStatuses shortyAction) {
+        this.shortyAction = shortyAction;
+    }
+
+    /** Сеттер статуса коротышки, меняет значение на true/false = "занят"/"свободен"
+     * @param actionCheck Действие которое нужно дать коротышке*/
+    public void setActionCheck(boolean actionCheck){
+        this.actionCheck = actionCheck;
+    }
+
+
     /** Меняет состояние коротышки на спящее,
      *  в случае если все коротышки спят, а коротышка, относящийся к методу,
      *  не ложится спать, выводит сообщение об этом
      * @param isSleeping влияет на то, будет ли ложиться спать коротышка, или нет*/
     public void goToSleep(boolean isSleeping) {
         if (isSleeping) {
+            setActionCheck(true);
             sleepingShorties++;
             this.isSleeping = isSleeping;
         }
         if (sleepingShorties == 7 && !isSleeping) {
-            char[] nameCharArray = name.toCharArray();
-            if(nameCharArray[nameCharArray.length-1] == 'а'){
-                nameCharArray[nameCharArray.length-1] = 'и';
-                name = new String(nameCharArray);
-            }
             System.out.println("Все кроме " + name + " уснули");
         }
     }
@@ -67,6 +105,7 @@ public abstract class Shorty implements PropertyChanging{
     /** Выводит имя объекта и предмет который он взял, добавляет этот предмет в инвентарь коротышки
      * @param object Предмет, который берёт коротышка*/
     public void grab(InanimateObject object) {
+        setActionCheck(true);
         System.out.println(name + " взял" + " " + object.toString().toLowerCase());
         for (int i=0; i< inventory.length; i++){
             if(inventory[i] == null){
@@ -78,11 +117,9 @@ public abstract class Shorty implements PropertyChanging{
                 System.out.println("В инвентаре " + name + " нет места");
             }
         }
+        setActionCheck(false);
     }
-    /**Геттер имени коротышки, используется в методах, где указывается с каким коротышкой идёт взаимодействие*/
-    public String getName(){
-        return name;
-    }
+
 
 
     @Override
@@ -130,5 +167,6 @@ public abstract class Shorty implements PropertyChanging{
         return Objects.hash(name);
     }
 }
+
 
 

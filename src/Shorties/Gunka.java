@@ -5,7 +5,7 @@ import Enums.Properies;
 /** Гунька */
 public class Gunka extends Shorty{
     /**Базовый конструктор*/
-    public Gunka(String name, Genders gender, boolean isSleeping){
+    public Gunka(String name, Genders gender, boolean isSleeping) {
         super(name, gender, isSleeping);
         this.name = name;
         this.gender = gender;

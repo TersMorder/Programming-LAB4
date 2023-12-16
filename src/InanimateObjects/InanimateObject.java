@@ -1,4 +1,4 @@
-package Objects;
+package InanimateObjects;
 
 /** Абстрактный класс неживых объектов реализующий их базовый функционал */
 public abstract class InanimateObject {
