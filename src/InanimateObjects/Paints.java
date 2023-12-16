@@ -1,4 +1,7 @@
-package Objects;
+package InanimateObjects;
+
+import InanimateObjects.InanimateObject;
+
 /** Класс неживого объекта - красок, используемый для проверки их наличия в инвентаре */
 public class Paints extends InanimateObject {
     protected String name;

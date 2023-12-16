@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"Enums"},{"l":"Interfaces"},{"l":"Objects"},{"l":"Shorties"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"Enums"},{"l":"InanimateObjects"},{"l":"Interfaces"},{"l":"Shorties"},{"l":"Shorties.Artist"}];updateSearchResults();
