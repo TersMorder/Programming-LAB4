@@ -19,17 +19,17 @@ public class Main {
         gunka.goToSleep(true);
         dontKnower.goToSleep(false);
         dontKnower.grab(paints);
-        dontKnower.startDrawing(dontKnower);
-        dontKnower.continiueDrawing(dontKnower, donut, Properies.FAT, Flags.BEFORE);
+        dontKnower.startDrawing();
+        dontKnower.continiueDrawing(donut, Properies.FAT, Flags.BEFORE);
         donut.dontFit();
-        dontKnower.continiueDrawing(dontKnower, hastyGuy, Properies.THINLEGS, Flags.BEFORE);
-        dontKnower.addToPicture(dontKnower, hastyGuy, "собачий хвост");
-        dontKnower.continiueDrawing(dontKnower, bulka, pulka, Properies.HORSEBACK, Properies.UNDER, Flags.AFTER);
-        dontKnower.continiueDrawing(dontKnower, pilulka);
-        dontKnower.addToPicture(dontKnower, pilulka, "с градусником вместо носа");
-        dontKnower.continiueDrawing(dontKnower, knower);
-        dontKnower.addToPicture(dontKnower, knower, "ослиные уши");
-        dontKnower.endDrawing(dontKnower);
+        dontKnower.continiueDrawing(hastyGuy, Properies.THINLEGS, Flags.BEFORE);
+        dontKnower.addToPicture(hastyGuy, "собачий хвост");
+        dontKnower.continiueDrawing(bulka, pulka, Properies.HORSEBACK, Properies.UNDER, Flags.AFTER);
+        dontKnower.continiueDrawing(pilulka);
+        dontKnower.addToPicture(pilulka, "с градусником вместо носа");
+        dontKnower.continiueDrawing(knower);
+        dontKnower.addToPicture(knower, "ослиные уши");
+        dontKnower.endDrawing();
 
 
 
