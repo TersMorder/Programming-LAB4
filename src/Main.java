@@ -1,12 +1,12 @@
 import Enums.Flags;
 import Enums.Genders;
 import Enums.Properies;
-import InanimateObjects.Paints;
+import InanimateObjects.InanimateObject;
 import Shorties.*;
 /** Основной класс, где происходит создание объектов и применение методов*/
 public class Main {
     public static void main(String[] args) {
-        Paints paints = new Paints("Краски");
+        InanimateObject paints = new InanimateObject("Краски"){};
         Gunka gunka = new Gunka("Гунька", Genders.M, false);
         Drawer dontKnower = new Drawer("Незнайка", Genders.M, false) {};
         Shorty bulka = new Shorty("Булька", Genders.M, true) {};
