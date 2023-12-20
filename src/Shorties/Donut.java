@@ -15,11 +15,11 @@ public class Donut extends Shorty {
     public void dontFit(){
         for(int i = 0; i< props.length-1; i++){
             if(props[i] == Properies.FAT){
-                System.out.println(oldName + " не поместился на картине");
+                System.out.println(name+ " не поместился на картине");
                 break;
             }
             else {
-                System.out.println(oldName + " поместился на картине");
+                System.out.println(name + " поместился на картине");
                 break;
             }
         }

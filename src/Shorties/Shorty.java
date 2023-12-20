@@ -4,17 +4,14 @@ import Enums.*;
 import Interfaces.PropertyChanging;
 import java.util.Objects;
 import InanimateObjects.InanimateObject;
-import Interfaces.ShortyActions;
 
 
 /** Абстрактный класс предоставляющий базовый функционал для классов-наследников — коротышек*/
-public abstract class Shorty implements PropertyChanging, ShortyActions {
+public abstract class Shorty implements PropertyChanging {
     /** Имя коротышки */
     protected String name;
     /** Пол коротышки */
     protected Genders gender;
-    /** Используется для сохранения начального имени коротышки */
-    final String oldName;
     /**Активность которой занят коротышка*/
     private ActionStatuses shortyAction;
     /** Инвентарь коротышки */
@@ -41,7 +38,6 @@ public abstract class Shorty implements PropertyChanging, ShortyActions {
         shortyAction = ActionStatuses.NONE;
         this.name=name;
         this.gender = gender;
-        this.oldName = name;
         this.isSleeping = isSleeping;
         if (isSleeping){
             ++sleepingShorties;
@@ -50,39 +46,49 @@ public abstract class Shorty implements PropertyChanging, ShortyActions {
 
     /** Используется для провеки наличия предметов у коротышки
      * @return Инвентарь которышки*/
-    public InanimateObject[] getInventory() {
+    protected InanimateObject[] getInventory() {
         return inventory;
     }
     /**Используется для вывода сообщений с правильными окончаниями
      * @return Пол коротышки*/
-    public Genders getGender(){
+    protected Genders getGender(){
         return gender;
     }
     /**Используется в методах, где указывается с каким коротышкой идёт взаимодействие
      * @return Имя коротышки*/
-    public String getName(){
+    protected String getName(){
         return name;
     }
+
     /** Используется для проверок последовательности действий и запрета на выполнение нескольких действий одновременно
      * @return Статус занятости коротышки*/
-    public boolean getActionCheck(){
-        return actionCheck;
-    }
+    protected boolean getActionCheck(){return actionCheck;}
     /** Геттер статуса активности коротышки, используется для проверки чем занят коротыщка
      * @return Чем занят коротышка*/
-    public ActionStatuses getShortyActivity(){
+    protected ActionStatuses getActivity(){
         return shortyAction;
     }
     /**Сеттер активности коротышки
      * @param shortyAction Активность, которой будет занят коротышка*/
-    public void setShortyAction(ActionStatuses shortyAction) {
+    protected void setActivity(ActionStatuses shortyAction) {
         this.shortyAction = shortyAction;
     }
 
     /** Сеттер статуса коротышки, меняет значение на true/false = "занят"/"свободен"
      * @param actionCheck Действие которое нужно дать коротышке*/
-    public void setActionCheck(boolean actionCheck){
+    protected void setActionCheck(boolean actionCheck){
         this.actionCheck = actionCheck;
+    }
+    /**Проверяет есть ли у коротышки сейчас что-то чем он занят*/
+    protected boolean checkActivity(){
+        boolean abaddonAction;
+        if(getActionCheck()){
+            abaddonAction = true;
+        }
+        else {
+            abaddonAction = false;
+        }
+        return abaddonAction;
     }
 
 
@@ -144,9 +150,7 @@ public abstract class Shorty implements PropertyChanging, ShortyActions {
         for(int i = 0; i<props.length-1; i++){
             props[i] = null;
         }
-        this.name = oldName;
     }
-
     /** Переопределение toString() для корректного вывода имени коротышки */
     @Override
     public String toString() {
