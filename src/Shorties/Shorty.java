@@ -18,9 +18,11 @@ public abstract class Shorty implements PropertyChanging {
     protected InanimateObject[] inventory = new InanimateObject[2];
     /** Свойства, которыми может обладать коротышка */
     private String property;
+    /** Лимит кол-ва свойств у коротышки */
+    private int propertiesLimit = 3;
     /** Массив enum Properties хранящий свойства коротышек
      * @see Properies */
-    protected final Properies[] props = Properies.values();
+    protected Properies[] props = new Properies[propertiesLimit];
     /** Значение поля увеличивается в случае если коротышка уже спит, или лег спать */
     protected static int sleepingShorties = 0;
     /** Используется для проверки занятости коротышки */
@@ -43,7 +45,6 @@ public abstract class Shorty implements PropertyChanging {
             ++sleepingShorties;
         }
     }
-
     /** Используется для провеки наличия предметов у коротышки
      * @return Инвентарь которышки*/
     protected InanimateObject[] getInventory() {
@@ -56,10 +57,9 @@ public abstract class Shorty implements PropertyChanging {
     }
     /**Используется в методах, где указывается с каким коротышкой идёт взаимодействие
      * @return Имя коротышки*/
-    protected String getName(){
+    public String getName(){
         return name;
     }
-
     /** Используется для проверок последовательности действий и запрета на выполнение нескольких действий одновременно
      * @return Статус занятости коротышки*/
     protected boolean getActionCheck(){return actionCheck;}
@@ -70,10 +70,10 @@ public abstract class Shorty implements PropertyChanging {
     }
     /**Сеттер активности коротышки
      * @param shortyAction Активность, которой будет занят коротышка*/
-    protected void setActivity(ActionStatuses shortyAction) {
-        this.shortyAction = shortyAction;
-    }
-
+    protected void setActivity(ActionStatuses shortyAction) {this.shortyAction = shortyAction;}
+    /** Меяет лимит кол-ва свойств у коротышки
+     * @param propertiesLimit новый лимит*/
+    protected void setPropertiesLimit(int propertiesLimit) {this.propertiesLimit = propertiesLimit;}
     /** Сеттер статуса коротышки, меняет значение на true/false = "занят"/"свободен"
      * @param actionCheck Действие которое нужно дать коротышке*/
     protected void setActionCheck(boolean actionCheck){
@@ -82,12 +82,7 @@ public abstract class Shorty implements PropertyChanging {
     /**Проверяет есть ли у коротышки сейчас что-то чем он занят*/
     protected boolean checkActivity(){
         boolean abaddonAction;
-        if(getActionCheck()){
-            abaddonAction = true;
-        }
-        else {
-            abaddonAction = false;
-        }
+        abaddonAction = getActionCheck();
         return abaddonAction;
     }
 
@@ -130,10 +125,13 @@ public abstract class Shorty implements PropertyChanging {
 
     @Override
     public void giveProperty(Properies property, Flags flag){
-        for(int i=0; i<props.length-1; i++){
+        for(int i=0; i<props.length; i++){
             if(props[i] != null){
                 props[i] = property;
                 break;
+            }
+            else if (i == 3 && props[i] == null){
+                props[i] = property;
             }
         }
         this.property = property.toString();
@@ -147,10 +145,23 @@ public abstract class Shorty implements PropertyChanging {
     }
     @Override
     public void clearProperty(){
-        for(int i = 0; i<props.length-1; i++){
+        for(int i = 0; i<props.length; i++){
             props[i] = null;
         }
     }
+    @Override
+    public void setProperties(Flags flag, Properies ... property){
+        if(property.length > propertiesLimit){
+            throw new IllegalArgumentException("Слишком много аргументов");
+        }
+        else {
+            for (Properies prop: props) {
+                giveProperty(prop, flag);
+                
+            }
+        }
+    }
+
     /** Переопределение toString() для корректного вывода имени коротышки */
     @Override
     public String toString() {
@@ -170,6 +181,7 @@ public abstract class Shorty implements PropertyChanging {
     public int hashCode() {
         return Objects.hash(name);
     }
+
 }
 
 

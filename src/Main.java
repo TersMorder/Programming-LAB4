@@ -29,7 +29,6 @@ public class Main {
         dontKnower.addToPicture(pilulka, "с градусником вместо носа");
         dontKnower.continiueDrawing(knower);
         dontKnower.addToPicture(knower, "ослиные уши");
-        dontKnower.endDrawing();
 
 
 

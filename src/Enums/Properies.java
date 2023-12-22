@@ -13,7 +13,9 @@ public enum Properies {
 
     HORSEBACK("верхом"),
 
-    UNDER("\"лощадь\"");
+    UNDER("\"лощадь\""),
+
+    HAPPYWITHHIMSELF("Довольный собой");
 
 
 

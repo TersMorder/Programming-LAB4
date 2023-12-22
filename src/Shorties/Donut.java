@@ -7,9 +7,6 @@ public class Donut extends Shorty {
     /**Базовый конструктор*/
     public Donut(String name, Genders gender, boolean isSleeping) {
         super(name, gender, isSleeping);
-        this.name = name;
-        this.gender = gender;
-        this.isSleeping = isSleeping;
     }
     /** Проверка помещается ли пончик на картине и вывод этого*/
     public void dontFit(){
