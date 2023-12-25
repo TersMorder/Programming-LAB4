@@ -8,7 +8,7 @@ import Shorties.*;
 public class Main {
     public static void main(String[] args) {
         InanimateObject paints = new InanimateObject("Краски"){};
-        InanimateObject glasses = new InanimateObject("пенсне") {};
+        InanimateObject glasses = new InanimateObject("Пенсне") {};
         Gunka gunka = new Gunka("Гунька", false);
         Drawer dontKnower = new Drawer("Незнайка", false) {};
         Shorty bulka = new Shorty("Булька", true) {};
@@ -32,9 +32,11 @@ public class Main {
         dontKnower.continiueDrawing(knower);
         dontKnower.addToPicture(knower, "ослиные уши");
         pilulkin.wakeUp();
-        pilulkin.see(dontKnower.showPicture(100));
+        pilulkin.see(dontKnower.showPicture(1));
         pilulkin.grab(glasses);
-        pilulkin.takeALook(PictureType.PORTRAITS);
+        pilulkin.takeALook(dontKnower.showPicture(1));
+        pilulkin.takeAGoodLaugh();
+
 
 
 

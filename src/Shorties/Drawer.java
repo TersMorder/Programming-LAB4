@@ -4,6 +4,7 @@ import Enums.*;
 import Interfaces.Drawing;
 import Shorties.Artist.*;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -24,9 +25,7 @@ public abstract class Drawer extends Shorty implements Drawing {
      */
     public Drawer(String name, boolean isSleeping) {
         super(name, isSleeping);
-        for (Picture p: donePictures) {
-            p = blankPicture;
-        }
+        Arrays.fill(donePictures, blankPicture);
     }
 
 
@@ -36,14 +35,21 @@ public abstract class Drawer extends Shorty implements Drawing {
         } else {
             for (int i = 0; i < inventory.length - 1; i++) {
                 if (inventory[i].toString().equals("Краски")) {
-                    setActivity(ActionStatuses.DRAWING);
-                    setActionCheck(true);
-                    System.out.println(name + " начал рисовать");
-                    System.out.println("Введите количество коротышек, которых " + name + " хочет нарисовать");
-                    Picture picture1 = new Picture(pictureType) {
-                    };
-                    picture = picture1;
-                } else {
+                    if (pictureType == PictureType.PORTRAITS) {
+                        Scanner scanner = new Scanner(System.in);
+                        setActivity(ActionStatuses.DRAWING);
+                        setActionCheck(true);
+                        System.out.println(name + " начал рисовать");
+                        System.out.println("Введите количество коротышек, которых " + name + " хочет нарисовать");
+                        picture = new Picture(pictureType) {};
+                        picture.setShortyAmount(scanner.nextInt());
+                        picture.setDrawnShorties(picture.getShortyAmount());
+
+                    }
+                    else{
+                        picture = blankPicture;
+                    }
+                }else {
                     System.out.println(name + " нечем рисовать");
                 }
             }
@@ -146,6 +152,7 @@ public abstract class Drawer extends Shorty implements Drawing {
                 endDrawing();
             } else if (!answer.equals("нет") && !answer.equals("no")) {
                 System.out.println("Пожалуйста, ответьте да/нет или yes/no");
+                calcAndEnd();
             }
 
 
@@ -168,10 +175,10 @@ public abstract class Drawer extends Shorty implements Drawing {
                             donePictures[i] = picture;
                             break;
                         }
-                        if(donePictures[10] != blankPicture){
+                        if(donePictures[9] != blankPicture){
                             System.out.println("Нет свободных мест, чтобы сохранить рисунок");
                             setActivity(ActionStatuses.DRAWING);
-
+                            break;
                         }
                     }
                 } else {
@@ -186,18 +193,18 @@ public abstract class Drawer extends Shorty implements Drawing {
     /**
      * Метод, который позволяет получить любую из нарисованных картин художника, по тому какой по счёту она была нарисована
      * @param picIndex Порядковый номер картины*/
-    public PictureType showPicture(int picIndex) {
+    public Picture showPicture(int picIndex) {
         try {
             if (donePictures[picIndex - 1] != null) {
-                return donePictures[picIndex - 1].getPictureType();
+                return donePictures[picIndex - 1];
             } else {
-                System.out.println("Нет картины под таким номером");
-                return blankPicture.getPictureType();
+                System.out.println(name + " не увидел рисунка под таким номером");
+                return blankPicture;
             }
         }
         catch (ArrayIndexOutOfBoundsException exception){
-            System.out.println("Нет картины под таким номером");
-            return blankPicture.getPictureType();
+            System.out.println(name + " не увидел рисунка под таким номером");
+            return blankPicture;
 
         }
     }

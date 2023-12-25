@@ -6,6 +6,7 @@ import Interfaces.PropertyChanging;
 import java.util.Objects;
 
 import InanimateObjects.InanimateObject;
+import Shorties.Artist.Picture;
 
 
 /**
@@ -194,23 +195,7 @@ public abstract class Shorty implements PropertyChanging {
         setActionCheck(false);
     }
 
-    /**
-     * Выводит сообщение о том, что коротышка рассматривает "что-то"
-     *
-     * @param o То самое "что-то"
-     */
-    public void takeALook(Object o) {
-        System.out.println(name + " рассматривает " + o);
-    }
 
-    /**
-     * Выводит сообщение о том, что коротышка увидел "что-то"
-     *
-     * @param o То самое "что-то"
-     */
-    public void see(Object o) {
-        System.out.println(name + " увидел " + o);
-    }
 
 
     @Override

@@ -25,8 +25,7 @@ public abstract class Picture {
      */
     public Picture(PictureType pictureType) {
         this.pictureType = pictureType;
-        Scanner scanner = new Scanner(System.in);
-        shortyAmount = scanner.nextInt();
+
         drawnShorties = new String[shortyAmount];
     }
     /**
@@ -35,6 +34,12 @@ public abstract class Picture {
     public PictureType getPictureType() {
         return pictureType;
     }
+/**Сеттер кол-ва коротышек которые будут на картине*/
+    public void setDrawnShorties(int shortyAmount) {
+        this.drawnShorties = new String[shortyAmount];
+    }
+
+
 
     /**
      * Геттер кол-ва коротышек которых нужно нарисовать, используется для вывода в endDrawing
@@ -71,4 +76,8 @@ public abstract class Picture {
         }
     }
 
+    @Override
+    public String toString() {
+        return pictureType.toString();
+    }
 }
