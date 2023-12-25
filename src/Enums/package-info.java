@@ -1,2 +1,4 @@
-/** Пакет, содержащий Enum Flags, Genders, Properties */
+/**
+ * Пакет, содержащий Enum Flags, Genders, Properties
+ */
 package Enums;

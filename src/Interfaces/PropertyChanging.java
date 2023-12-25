@@ -14,6 +14,6 @@ public interface PropertyChanging {
     * @param property свойства которые нужно дать коротышке
     * @param flag флаг отвечающий за позицию свойства относительно имени до/после
     */
-   void setProperties(Flags flag, Properies ... property);
+   void setProperties(Flags flag, Properies... property);
 
 }

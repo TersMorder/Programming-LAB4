@@ -1,8 +1,8 @@
 package Enums;
 
-import Shorties.Shorty;
-
-/** Enum со свойствами которые могут получить коротышки*/
+/**
+ * Enum со свойствами которые могут получить коротышки
+ */
 public enum Properies {
 
     OFFENSED("обижен"),
@@ -18,10 +18,15 @@ public enum Properies {
     HAPPYWITHHIMSELF("Довольный собой");
 
 
-
     private final String propName;
-    Properies(String propName){this.propName=propName;}
-    /** Переопределение toString для корректного вывода свойств */
+
+    Properies(String propName) {
+        this.propName = propName;
+    }
+
+    /**
+     * Переопределение toString для корректного вывода свойств
+     */
     @Override
     public String toString() {
         return propName;
