@@ -5,6 +5,7 @@ import Interfaces.Drawing;
 import Shorties.Artist.*;
 
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -15,11 +16,18 @@ public abstract class Drawer extends Shorty implements Drawing {
      * Картина, которую рисует коротышка
      */
     private Picture picture;
-
-    /**Массив с нарисованными картинами, по умолчанию все слоты забиты пустыми холстами*/
+    /**
+     * Используется несколько раз для корректной реализации рисования
+     */
+    private final Scanner scanner = new Scanner(System.in);
+    /**
+     * Массив с нарисованными картинами, по умолчанию все слоты забиты пустыми холстами
+     */
     private final Picture[] donePictures = new Picture[10];
+    /**Пустой холст, который есть по умолчанию у художников*/
+    private final Picture blankPicture = new Picture(PictureType.BLANK) {
+    };
 
-    private final Picture blankPicture = new Picture(PictureType.BLANK) {};
     /**
      * Базовый конструктор
      */
@@ -36,20 +44,20 @@ public abstract class Drawer extends Shorty implements Drawing {
             for (int i = 0; i < inventory.length - 1; i++) {
                 if (inventory[i].toString().equals("Краски")) {
                     if (pictureType == PictureType.PORTRAITS) {
-                        Scanner scanner = new Scanner(System.in);
+
                         setActivity(ActionStatuses.DRAWING);
                         setActionCheck(true);
                         System.out.println(name + " начал рисовать");
                         System.out.println("Введите количество коротышек, которых " + name + " хочет нарисовать");
-                        picture = new Picture(pictureType) {};
-                        picture.setShortyAmount(scanner.nextInt());
+                        picture = new Picture(pictureType) {
+                        };
+                        inputShortyAmount();
                         picture.setDrawnShorties(picture.getShortyAmount());
 
-                    }
-                    else{
+                    } else {
                         picture = blankPicture;
                     }
-                }else {
+                } else {
                     System.out.println(name + " нечем рисовать");
                 }
             }
@@ -57,17 +65,17 @@ public abstract class Drawer extends Shorty implements Drawing {
     }
 
     public void continiueDrawing(Shorty shorty) {
+        checkEndNeeding();
         if (getActivity() != ActionStatuses.DRAWING && getActivity() != ActionStatuses.DONEDRAWING) {
             System.out.println(name + " занят!");
         } else if (getActivity() == ActionStatuses.DONEDRAWING) {
-            System.out.println(name + " уже закончил рисовать!");
+            System.out.println(name + " ещё не начал рисовать снова");
         } else {
             if (getActivity() == ActionStatuses.DRAWING) {
                 String shortyName = shorty.getName();
                 System.out.println(name + " нарисовал " + shortyName);
                 picture.addDrawnShorty(shorty);
                 DrawnShortiesCounter.addDrawnShorty(1);
-                calcAndEnd();
             } else {
                 System.out.println(name + " ещё не начал рисовать!");
             }
@@ -75,11 +83,11 @@ public abstract class Drawer extends Shorty implements Drawing {
     }
 
     public void continiueDrawing(Shorty shorty, Properies property, Flags flag) {
-
+        checkEndNeeding();
         if (getActivity() != ActionStatuses.DRAWING && getActivity() != ActionStatuses.DONEDRAWING) {
             System.out.println(name + " занят!");
         } else if (getActivity() == ActionStatuses.DONEDRAWING) {
-            System.out.println(name + " уже закончил рисовать!");
+            System.out.println(name + " ещё не начал рисовать снова");
         } else {
             if (getActivity() == ActionStatuses.DRAWING) {
                 shorty.giveProperty(property, flag);
@@ -87,7 +95,6 @@ public abstract class Drawer extends Shorty implements Drawing {
                 System.out.println(name + " нарисовал " + shortyName);
                 picture.addDrawnShorty(shorty);
                 DrawnShortiesCounter.addDrawnShorty(1);
-                calcAndEnd();
             } else {
                 System.out.println(name + " ещё не начал рисовать!");
             }
@@ -95,10 +102,11 @@ public abstract class Drawer extends Shorty implements Drawing {
     }
 
     public void continiueDrawing(Shorty shorty1, Shorty shorty2, Properies property1, Properies property2, Flags flag) {
+        checkEndNeeding();
         if (getActivity() != ActionStatuses.DRAWING && getActivity() != ActionStatuses.DONEDRAWING) {
             System.out.println(name + " занят!");
         } else if (getActivity() == ActionStatuses.DONEDRAWING) {
-            System.out.println(name + " уже закончил рисовать!");
+            System.out.println(name + " ещё не начал рисовать снова");
         } else {
             if (getActivity() == ActionStatuses.DRAWING) {
                 if (property1 == Properies.HORSEBACK) {
@@ -119,7 +127,6 @@ public abstract class Drawer extends Shorty implements Drawing {
                 picture.addDrawnShorty(shorty1);
                 picture.addDrawnShorty(shorty2);
                 DrawnShortiesCounter.addDrawnShorty(2);
-                calcAndEnd();
             } else {
                 System.out.println(name + " ещё не начал рисовать!");
             }
@@ -130,52 +137,36 @@ public abstract class Drawer extends Shorty implements Drawing {
         if (getActivity() != ActionStatuses.DRAWING && getActivity() != ActionStatuses.DONEDRAWING) {
             System.out.println(name + " занят!");
         } else if (getActivity() == ActionStatuses.DONEDRAWING) {
-            System.out.println(name + " уже закончил рисовать!");
+            System.out.println(name + " ещё не начал рисовать снова");
         } else {
             if (getActivity() == ActionStatuses.DRAWING) {
                 System.out.println(name + " пририсовал " + shorty.getName() + " " + detail);
-                if (DrawnShortiesCounter.calcDrawnShorties() == picture.getShortyAmount()) {
-                    endDrawing();
-                }
+                checkEndNeeding();
             } else {
                 System.out.println(name + " ещё не начал рисовать!");
             }
         }
     }
 
-    private void calcAndEnd() {
-        if (DrawnShortiesCounter.calcDrawnShorties() == picture.getShortyAmount()) {
-            System.out.println(name + " закончил рисовать?");
-            Scanner Scananswer = new Scanner(System.in);
-            String answer = Scananswer.nextLine().toLowerCase();
-            if (answer.equals("да") || answer.equals("yes")) {
-                endDrawing();
-            } else if (!answer.equals("нет") && !answer.equals("no")) {
-                System.out.println("Пожалуйста, ответьте да/нет или yes/no");
-                calcAndEnd();
-            }
 
-
-        }
-    }
 
     public void endDrawing() {
         if (getActivity() != ActionStatuses.DRAWING && getActivity() != ActionStatuses.DONEDRAWING) {
             System.out.println(name + " занят!");
         } else if (getActivity() == ActionStatuses.DONEDRAWING) {
-            System.out.println(name + " уже закончил рисовать!");
+            System.out.println(name + " ещё не начал рисовать снова");
         } else {
             if (getActivity() == ActionStatuses.DRAWING) {
                 if (picture.getDrawnShorties()[picture.getDrawnShorties().length - 1] != null) {
                     System.out.println(name + " нарисовал всех в смешном и нелепом виде");
                     setActionCheck(false);
                     setActivity(ActionStatuses.DONEDRAWING);
-                    for (int i = 0; i<donePictures.length; i++ ) {
-                        if(donePictures[i] == blankPicture){
+                    for (int i = 0; i < donePictures.length; i++) {
+                        if (donePictures[i] == blankPicture) {
                             donePictures[i] = picture;
                             break;
                         }
-                        if(donePictures[9] != blankPicture){
+                        if (donePictures[9] != blankPicture) {
                             System.out.println("Нет свободных мест, чтобы сохранить рисунок");
                             setActivity(ActionStatuses.DRAWING);
                             break;
@@ -190,9 +181,18 @@ public abstract class Drawer extends Shorty implements Drawing {
         }
     }
 
+    private void checkEndNeeding(){
+        if (DrawnShortiesCounter.calcDrawnShorties() >= picture.getShortyAmount()) {
+            endDrawing();
+        }
+    }
+
     /**
      * Метод, который позволяет получить любую из нарисованных картин художника, по тому какой по счёту она была нарисована
-     * @param picIndex Порядковый номер картины*/
+     * НЕПРОВЕРЯЕМОЕ ИСКЛЮЧЕНИЕ + try catch
+     *
+     * @param picIndex Порядковый номер картины
+     */
     public Picture showPicture(int picIndex) {
         try {
             if (donePictures[picIndex - 1] != null) {
@@ -201,11 +201,34 @@ public abstract class Drawer extends Shorty implements Drawing {
                 System.out.println(name + " не увидел рисунка под таким номером");
                 return blankPicture;
             }
-        }
-        catch (ArrayIndexOutOfBoundsException exception){
+        } catch (ArrayIndexOutOfBoundsException exception) {
             System.out.println(name + " не увидел рисунка под таким номером");
             return blankPicture;
 
+        }
+    }
+
+    /**
+     * Метод обрабатывающий ввод количества коротышек на рисунке
+     * НЕПРОВЕРЯЕМОЕ ИСКЛЮЧЕНИЕ + try catch
+     * вижу тут некоторую проблему, не знаю почему так происходит
+     */
+    public void inputShortyAmount() {
+        while (true) {
+            try {
+                int tempInt = scanner.nextInt();
+                picture.setShortyAmount(tempInt);
+                if (tempInt >= 1) {
+                    break;
+                }
+                else {
+                    System.out.println("Введите число не меньше 1 больше и не больше 2^31-1");
+                    inputShortyAmount();
+                }
+            } catch (InputMismatchException e) {
+                scanner.next();
+                System.out.println("InputMismatchException, введите число не меньше 1 больше и не больше 2^31-1");
+            }
         }
     }
 
