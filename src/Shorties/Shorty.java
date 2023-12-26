@@ -1,12 +1,9 @@
 package Shorties;
-
 import Enums.*;
 import Interfaces.PropertyChanging;
-
 import java.util.Objects;
-
 import InanimateObjects.InanimateObject;
-import Shorties.Artist.Picture;
+
 
 
 /**
@@ -223,7 +220,7 @@ public abstract class Shorty implements PropertyChanging {
             props[i] = null;
         }
     }
-
+/**Используется throw*/
     @Override
     public void setProperties(Flags flag, Properies... property) {
         if (property.length > propertiesLimit) {

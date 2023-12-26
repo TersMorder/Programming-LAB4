@@ -2,7 +2,8 @@ package Enums;
 
 public enum PictureType {
     PORTRAITS("портрет"),
-    BLANK("пустой холст");
+    BLANK("пустой холст"),
+    GRAFFITI("граффити");
 
     private String type;
 

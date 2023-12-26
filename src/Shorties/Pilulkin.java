@@ -1,11 +1,11 @@
 package Shorties;
 
 import Enums.ActionStatuses;
-import Enums.Properies;
 import InanimateObjects.InanimateObject;
 import Shorties.Artist.Picture;
-
+/**Класс Пилюлькина*/
 public class Pilulkin extends Shorty {
+    /**Базовый конструктор*/
     public Pilulkin(String name, boolean isSleeping) {
         super(name, isSleeping);
     }
@@ -25,12 +25,11 @@ public class Pilulkin extends Shorty {
     }
     /**
      * Выводит сообщение о том, что коротышка рассматривает какую-то картину
-     *
      * @param picture Та самая картина
      */
     public void takeALook(Picture picture) {
         setActivity(ActionStatuses.TAKINGLOOK);
-        System.out.println(name + " " + getActivity() + " " + picture);
+        System.out.println(name + " " + getActivity() + " " + picture.getPictureType());
     }
 
     /**
@@ -38,10 +37,10 @@ public class Pilulkin extends Shorty {
      *
      * @param picture Та самая картина
      */
-    public void see(Picture picture) {
-        System.out.println(name + " увидел " + picture);
+    public void seePicture(Picture picture) {
+        System.out.println(name + " увидел " + picture.getPictureType());
     }
-
+/**Меняет состояние Пилюлькина на смеющиеся и выводит сообщение о том, что он смеется*/
     public void takeAGoodLaugh(){
         setActivity(ActionStatuses.LAUGHING);
         System.out.println(name + " " + getActivity());
