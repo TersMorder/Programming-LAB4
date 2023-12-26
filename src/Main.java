@@ -1,3 +1,4 @@
+import Constructions.Construction;
 import Enums.Flags;
 import Enums.PictureType;
 import Enums.Properies;
@@ -8,9 +9,10 @@ import Shorties.*;
 public class Main {
     public static void main(String[] args) {
         InanimateObject paints = new InanimateObject("Краски"){};
-        InanimateObject glasses = new InanimateObject("пенсне") {};
+        InanimateObject glasses = new InanimateObject("Пенсне") {};
         Gunka gunka = new Gunka("Гунька", false);
-        Drawer dontKnower = new Drawer("Незнайка", false) {};
+        Drawer.ShortyDrawer dontKnower = new Drawer.ShortyDrawer("Незнайка", false);
+        Drawer.Muse muse = dontKnower.new Muse("Девочка-вардилочка");
         Shorty bulka = new Shorty("Булька", true) {};
         Shorty pulka =new Shorty("Пулька", true){};
         Donut donut = new Donut("Пончик",true);
@@ -32,9 +34,17 @@ public class Main {
         dontKnower.continiueDrawing(knower);
         dontKnower.addToPicture(knower, "ослиные уши");
         pilulkin.wakeUp();
-        pilulkin.see(dontKnower.showPicture(100));
+        pilulkin.seePicture(dontKnower.getPictureType(1));
         pilulkin.grab(glasses);
-        pilulkin.takeALook(PictureType.PORTRAITS);
+        pilulkin.takeALook(dontKnower.getPictureType(1));
+        pilulkin.takeAGoodLaugh();
+        muse.GiveIdea("Знайка с пивом");
+        dontKnower.drawIdea(PictureType.PORTRAITS);
+        dontKnower.showPicture(2);
+        Construction wall = new Construction("стене", 2) {};
+        dontKnower.drawGraffiti(wall, "Большой Знайка с пивом");
+        wall.showWhatsAtConstruction(1);
+
 
 
 
